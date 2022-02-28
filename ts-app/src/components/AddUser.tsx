@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, getUsers, saveUser } from '../api';
 import { getUserType } from './Form';
+import moment from 'moment';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -13,7 +14,7 @@ const AddUser: React.FunctionComponent = ({ }) => {
         name: '',
         sureName: '',
         userType: '',
-        date: '',
+        date: moment(new Date()).format("MM/DD/YYYY"),
         city: '',
         adress: ''
     })
@@ -29,6 +30,7 @@ const AddUser: React.FunctionComponent = ({ }) => {
     }
     const onSave = (ev: any): void => {
         ev.preventDefault()
+
         saveUser(user).then(() => navigate('/'))
     }
     return (
@@ -44,8 +46,6 @@ const AddUser: React.FunctionComponent = ({ }) => {
                     <option className='select' key="default" value=''>Choose type...</option>
                     {getUserType(data).map((typeUser, i) => <option className='select' key={`${i}`} value={typeUser}>{typeUser}</option>)}
                 </select>
-                <label className='labelForm'>Created at:</label>
-                <input className="inputForm" name='date' type="date" value={user.date} required onChange={handleChange} />
                 <label className='labelForm'>City:</label>
                 <input className="inputForm" name='city' type="text" value={user.city} onChange={handleChange} />
                 <label className='labelForm'>Adress:</label>

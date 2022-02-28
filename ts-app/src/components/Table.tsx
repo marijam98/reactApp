@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from '../api';
-import Moment from 'react-moment';
+import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
@@ -40,7 +40,7 @@ const Table: React.FunctionComponent<Props> = ({ filterData, onDelete }) => {
                                     <td>{data.name}</td>
                                     <td>{data.sureName}</td>
                                     <td>{data.userType}</td>
-                                    <td><Moment format="MM/DD/YYYY">{data.date}</Moment></td>
+                                    <td>{moment(data.date).format("MM/DD/YYYY")}</td>
                                     <td>{data.city}</td>
                                     <td>{data.adress}</td>
                                     <td>

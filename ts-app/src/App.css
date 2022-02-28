@@ -54,6 +54,13 @@ li a {
   border-radius: 5px;
   border: 1px solid black;
 }
+.inputDate{
+  margin-left: 10px;
+  padding: 3px;
+  width: 130px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
 .select{
   margin-left: 10px;
   margin-bottom: 10px;
@@ -76,7 +83,7 @@ p {
 }
 .addForm {
   margin-left: 230px;
-  width: 200px;
+  width: 220px;
 }
 .selectForm{
   margin-left: 5px;
