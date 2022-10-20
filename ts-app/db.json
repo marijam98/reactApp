@@ -2,8 +2,8 @@
   "person": [
     {
       "id": 1,
-      "name": "John",
-      "sureName": "Ander",
+      "name": "Johna",
+      "sureName": "Anders",
       "userType": "Director",
       "date": "2022-01-06",
       "city": "Denver SA",
@@ -23,7 +23,7 @@
       "name": "Sarah",
       "sureName": "Smitih",
       "userType": "Manager",
-      "date": "2022-02-02",
+      "date": "2022-02-04",
       "city": "Chicago",
       "adress": "Michigan Avenue"
     },
@@ -32,7 +32,7 @@
       "name": "Johanna",
       "sureName": "Jones",
       "userType": "Programmer",
-      "date": "2021-11-07",
+      "date": "2021-11-11",
       "city": "San Francisco",
       "adress": "Valencia Street"
     },
@@ -91,22 +91,13 @@
       "adress": "Ocean Drive"
     },
     {
-      "name": "Milena",
-      "sureName": "Peric",
-      "userType": "Director",
-      "date": "2022-02-03",
-      "city": "",
-      "adress": "",
+      "name": "Marija",
+      "sureName": "Milićević",
+      "userType": "Programmer",
+      "date": "06/08/2022",
+      "city": "Kosjerić",
+      "adress": "Antonija Kosjera",
       "id": 11
-    },
-    {
-      "name": "Milena",
-      "sureName": "B",
-      "userType": "Director",
-      "date": "02/28/2022",
-      "city": "Denver",
-      "adress": "",
-      "id": 12
     }
   ]
 }

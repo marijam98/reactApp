@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { User, getUsers, saveUser } from '../api';
+import {  TextField, Stack, IDropdownOption, DefaultButton, PrimaryButton, Dropdown} from '@fluentui/react'
+import { User, saveUser } from '../api';
 import { getUserType } from './Form';
 import moment from 'moment';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -22,42 +23,110 @@ const AddUser: React.FunctionComponent = ({ }) => {
         setData(state)
     }, [state])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>): any => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        })
-    }
     const onSave = (ev: any): void => {
         ev.preventDefault()
 
         saveUser(user).then(() => navigate('/'))
     }
+
+    const handleChangeName = (e:string ): any => {
+        setUser({
+            ...user,
+            name: e
+        })
+    }
+    const handleChangeSureName = (e:string ): any => {
+        setUser({
+            ...user,
+            sureName: e
+        })
+    }
+    const handleChangeUsertype = (e:string ): any => {
+        setUser({
+            ...user,
+            userType: e
+        })
+    }
+    const handleChangeCity = (e:string ): any => {
+        setUser({
+            ...user,
+            city: e
+        })
+    }
+    const handleChangeAdress = (e:string ): any => {
+        setUser({
+            ...user,
+            adress: e
+        })
+    }
+    const userOptions: IDropdownOption[] = 
+        getUserType(data).map((user, i) => ({
+            key: i,
+            text: user,
+        }))
+
     return (
-        <div>
-            <div><p>Add user</p></div>
-            <form className="addForm">
-                <label className='labelForm'>Name:</label>
-                <input className="inputForm" name='name' type="text" value={user.name} required={!user.name ? true : false} onChange={handleChange} />
-                <label className='labelForm'>Surename:</label>
-                <input className="inputForm" name='sureName' type="text" value={user.sureName} required onChange={handleChange} />
-                <label className='labelForm'>User type:</label>
-                <select className='select' name='userType' value={user.userType} required onChange={handleChange}>
-                    <option className='select' key="default" value=''>Choose type...</option>
-                    {getUserType(data).map((typeUser, i) => <option className='select' key={`${i}`} value={typeUser}>{typeUser}</option>)}
-                </select>
-                <label className='labelForm'>City:</label>
-                <input className="inputForm" name='city' type="text" value={user.city} onChange={handleChange} />
-                <label className='labelForm'>Adress:</label>
-                <input className="inputForm" name='adress' type="text" value={user.adress} onChange={handleChange} />
-                <div className='buttons'>
-                    <button className='btnSaveAdd' type="submit" disabled={!(user.userType && user.name && user.name && user.sureName && user.date)} onClick={onSave}>Save</button>
+        <Stack  tokens={{ padding: 20, childrenGap: 10 }} >
+            <Stack>
+                   <TextField 
+                   label="Name:" 
+                   placeholder="Type name..." 
+                   type="text" 
+                   value={user.name} 
+                   styles={{  root: { color: '#000',  width: 285  } }}
+                   onChange={(_, value) => {
+                    console.log('val', value)
+                    return value !== undefined && handleChangeName(value)}} />
+            </Stack>
+            <Stack>
+                   <TextField 
+                   label="Surename:" 
+                   placeholder="Type surename..." 
+                   type="text" 
+                   value={user.sureName} 
+                   styles={{  root: { color: '#000',  width: 285  } }}
+                   onChange={(_, value) => {
+                       console.log('val', value)
+                       return value !== undefined && handleChangeSureName(value)}} />
+            </Stack>
+            <Stack >
+                    <Dropdown
+                     placeholder="Choose type" 
+                     label="Filter by user type"
+                     onChange={(_, option) =>  option !== undefined && handleChangeUsertype(option.text)}
+                     options={userOptions}
+                     styles={ {  root: {   width: 285  } } }
+                     />
+                </Stack>
+                <Stack>
+                   <TextField 
+                   label="City:" 
+                   placeholder="Type city..." 
+                   type="text" 
+                   value={user.city} 
+                   styles={{  root: { color: '#000',  width: 285  } }}
+                   onChange={(_, value) => {
+                       console.log('val', value)
+                       return value !== undefined && handleChangeCity(value)}} />
+            </Stack>
+            <Stack>
+                   <TextField 
+                   label="Adress:" 
+                   placeholder="Type adress..." 
+                   type="text" 
+                   value={user.adress} 
+                   styles={{  root: { color: '#000',  width: 285  } }}
+                   onChange={(_, value) => {
+                       console.log('val', value)
+                       return value !== undefined && handleChangeAdress(value)}} />
+            </Stack>
+            <Stack horizontal tokens={{ padding: 20, childrenGap: 10 }} >
+                    <PrimaryButton text="Save" onClick={onSave} allowDisabledFocus disabled={!(user.userType && user.name && user.name && user.sureName && user.date)} />
                     <Link to='/'>
-                        <button className='btnBack' type="submit">Back</button>
+                        <DefaultButton text="Back"  allowDisabledFocus />
                     </Link>
-                </div>
-            </form>
-        </div>
+                </Stack>
+                </Stack>
     )
 }
 

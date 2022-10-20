@@ -3,22 +3,23 @@ import { User, getUsers, deleteUser } from '../api';
 import Form from './Form';
 import Table from './Table';
 import Message from './Message';
+import {  Stack } from '@fluentui/react'
 
 const Home: React.FunctionComponent = ({ }) => {
     const [name, setName] = useState<string | undefined>()
     const [date, setDate] = useState<string | undefined>()
-    const [userType, setUserType] = useState<string | undefined>('')
+    const [userType, setUserType] = useState<string | undefined>()
     const [data, setData] = useState<Array<User>>([])
     const [filterData, setFilterData] = useState<Array<User>>([])
 
-    const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value)
+    const changeName = (value: string) => {
+        setName(value)
     }
-    const changeUserType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setUserType(e.target.value)
+    const changeUserType = (e: string) => {
+        setUserType(e)
     }
-    const changeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDate(e.target.value)
+    const changeDate = (e: string) => {
+        setDate(e)
     }
     useEffect(() => {
         getUsers().then(data => {
@@ -26,41 +27,42 @@ const Home: React.FunctionComponent = ({ }) => {
             setFilterData(data)
         }).catch(e => console.log("ERROR", e))
     }, [])
+
     const filterUsers = (): void => {
         setFilterData(
             data.filter((data) => {
                 if (name && userType && date) {
-                    return data.name.toLowerCase().startsWith(name.toLowerCase())
-                        && data.userType === userType && data.date <= date
+                    return (data.name ? data.name : '').toLowerCase().startsWith(name.toLowerCase())
+                        && data.userType === userType && (data.date ? data.date : '') <= date
                 }
                 if (name && userType) {
-                    return data.name.toLowerCase().startsWith(name.toLowerCase())
+                    return (data.name ? data.name : '').toLowerCase().startsWith(name.toLowerCase())
                         && data.userType === userType
                 }
                 if (name && date) {
-                    return data.name.toLowerCase().startsWith(name.toLowerCase())
-                        && data.date <= date
+                    return (data.name ? data.name : '').toLowerCase().startsWith(name.toLowerCase())
+                        && (data.date ? data.date : '') <= date
                 }
                 if (userType && date) {
                     return data.userType === userType
-                        && data.date <= date
+                        && (data.date ? data.date : '') <= date
                 }
                 if (name) {
-                    return data.name.toLowerCase().startsWith(name.toLowerCase())
+                    return (data.name ? data.name : '').toLowerCase().startsWith(name.toLowerCase())
                 }
                 if (userType) {
                     return data.userType === userType
                 }
                 if (date) {
-                    return data.date <= date
+                    return (data.date ? data.date : '') <= date
                 }
                 return data
             }
             ))
     }
+    
     const clearFilter = (): void => {
         setName('')
-        setUserType('')
         setFilterData(data)
         setDate('')
     }
@@ -72,7 +74,14 @@ const Home: React.FunctionComponent = ({ }) => {
     }
 
     return (
-        <div className='body'>
+        <Stack horizontal tokens={{ padding: 20, childrenGap: 10 }} >
+                        {filterData.length === 0
+                ? <Message />
+                : <Table
+                    filterData={filterData}
+                    onDelete={onDelete}
+                />
+            }
             <Form
                 data={data}
                 date={date}
@@ -84,14 +93,8 @@ const Home: React.FunctionComponent = ({ }) => {
                 changeUserType={changeUserType}
                 changeDate={changeDate}
             />
-            {filterData.length === 0
-                ? <Message />
-                : <Table
-                    filterData={filterData}
-                    onDelete={onDelete}
-                />
-            }
-        </div>
+
+        </Stack>
     )
 }
 

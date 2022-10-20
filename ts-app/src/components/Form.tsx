@@ -1,6 +1,8 @@
 import React from "react";
+import {  TextField, Stack, IDropdownOption, DefaultButton, PrimaryButton, Dropdown, IIconProps} from '@fluentui/react'
+import { IconButton } from '@fluentui/react/lib/Button';
 import { User } from '../api';
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 type Props = {
     data: Array<User>,
@@ -9,15 +11,15 @@ type Props = {
     userType: string | undefined,
     filterUsers: () => void,
     clearFilter: () => void,
-    changeName: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    changeUserType: (e: React.ChangeEvent<HTMLSelectElement>) => void,
-    changeDate: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    changeName: (e: string) => void,
+    changeUserType: (e: string) => void,
+    changeDate: (e: string) => void,
 }
 
 export const getUserType = (data: Array<User>): Array<string> => {
     return data.reduce((typeUsers: Array<string>, user: User) => {
-        if (!typeUsers.includes(user.userType)) {
-            typeUsers.push(user.userType)
+        if (!typeUsers.includes(user.userType || '')) {
+            typeUsers.push(user.userType || '')
             return typeUsers
         } else {
             return typeUsers
@@ -25,9 +27,15 @@ export const getUserType = (data: Array<User>): Array<string> => {
     }, [])
 }
 
-const Form: React.FunctionComponent<Props> = ({ data, name, date, userType, filterUsers, clearFilter, changeName, changeUserType, changeDate }) => {
+
+const Form: React.FunctionComponent<Props> = ({ data, name, userType, filterUsers, clearFilter, changeName, changeUserType, changeDate }) => {
     const navigate = useNavigate()
 
+    const userOptions: IDropdownOption[] = 
+        getUserType(data).map((user, i) => ({
+            key: i,
+            text: user,
+        }))
     const search = (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         ev.preventDefault();
         filterUsers()
@@ -36,28 +44,42 @@ const Form: React.FunctionComponent<Props> = ({ data, name, date, userType, filt
         ev.preventDefault();
         clearFilter();
     }
+    const icon: IIconProps = { iconName: 'ClearFormatting' };
+    
     return (
         <div>
-            <div className='searchdiv'>
-                <label className='label'>
-                    Name:
-                    <input className="inputName" placeholder="Type name..." type="text" value={name} onChange={changeName} />
-                </label>
-                <label className='label'>
-                    User type:
-                    <select className='select' value={userType} onChange={changeUserType}>
-                        <option className='select' key="default" value=''>Choose type...</option>
-                        {getUserType(data).map((typeUser, i) => <option className='select' key={`${i}`} value={typeUser}>{typeUser}</option>)}
-                    </select>
-                </label>
-                <label className='label'>
-                    Date:
-                    <input className="inputDate" type="date" value={date} onChange={changeDate} />
-                </label>
-                <button className='btnSearch' onClick={search}>Search</button>
-                <button className='btnClear' onClick={clear}>Clear</button>
-                <button className='btnAddUser' onClick={() => (navigate('/add', { state: data }))}>Add User</button>
-            </div>
+            <Stack  tokens={{ padding: 10, childrenGap: 10 }} >
+                
+                <Stack>
+                   <TextField 
+                   label="Filter by name" 
+                   placeholder="Type name..." 
+                   type="text" 
+                   value={name} 
+                   styles={{  root: { color: '#000',  width: 285  } }}
+                   onChange={(_, value) => {
+                       console.log('val', value)
+                       return value !== undefined && changeName(value)}} />
+                       {/* <IconButton iconProps={icon} title="Clear" onClick={clear}/> */}
+                       
+                </Stack>
+                <Stack >
+                    <Dropdown
+                     placeholder="Choose type" 
+                     label="Filter by user type"
+                     onChange={(_, option) =>  option !== undefined  && changeUserType(option.text)}
+                     options={userOptions}
+                     styles={ {  root: {   width: 285  } } }
+                     />
+                </Stack>
+                </Stack>
+                <Stack horizontal tokens={{ padding: 10, childrenGap: 10 }} >
+                    <DefaultButton text="Search" onClick={search} allowDisabledFocus />
+                    <DefaultButton text="Clear" onClick={clear} allowDisabledFocus />
+                </Stack>
+                <Stack horizontal tokens={{ padding: 10, childrenGap: 10 }} >
+                <PrimaryButton text="Add User" onClick={() => (navigate('/add', { state: data }))} allowDisabledFocus />
+                </Stack>
         </div>
     )
 }

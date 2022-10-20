@@ -1,9 +1,12 @@
 import React from 'react';
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+
+initializeIcons();
 
 ReactDOM.render(
   <BrowserRouter>

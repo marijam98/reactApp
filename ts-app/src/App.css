@@ -4,64 +4,49 @@
 }
 
 .body {
-margin-left: 230px;
+  margin-left: 230px;
 }
 
-h1{
-  background-color: #d84315;
+h1 {
+  background-color: rgb(0, 120, 212);
   padding: 6px;
-  margin: 0px;
+  margin: 0;
   font-weight: 600;
-  color: black;
+  color: white;
 }
+
 .msg {
   margin-left: 230px;
 }
-ul {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-  background-color: #ffab91;
-  height: 100%;
-  width: 200px;
-  position:absolute;
-  font-weight: 700;
-  overflow: auto;
-}
-.active {
-  background-color: #fa9576;
-}
 
-li a {
-  display: block;
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-  text-align: center;
-}
-.searchdiv{
+
+.searchdiv {
   padding-top: 15px;
 }
-.label{
+
+.label {
   padding-left: 5px;
   padding-right: 5px;
   font-weight: 600;
 }
-.inputName{
+
+.inputName {
   margin-left: 10px;
   padding: 4px;
   width: 130px;
   border-radius: 5px;
   border: 1px solid black;
 }
-.inputDate{
+
+.inputDate {
   margin-left: 10px;
   padding: 3px;
   width: 130px;
   border-radius: 5px;
   border: 1px solid black;
 }
-.select{
+
+.select {
   margin-left: 10px;
   margin-bottom: 10px;
   padding: 4px;
@@ -71,21 +56,25 @@ li a {
   border: 1px solid black;
   width: 130px;
 }
+
 p {
   margin-top: 15px;
   margin-left: 240px;
   font-weight: 500;
   color: #000000;
 }
+
 .inputForm {
   margin-bottom: 10px;
   width: 200px;
 }
+
 .addForm {
   margin-left: 230px;
   width: 220px;
 }
-.selectForm{
+
+.selectForm {
   margin-left: 5px;
   margin-bottom: 10px;
   padding: 6px;
@@ -95,171 +84,23 @@ p {
   border: 2px solid black;
   width: 210px;
 }
-.btnSearch{
-  margin-left: 10px;
-  background-color: #ffddc1;
-  border: 2px solid #ffddc1;
-  color:black;
-  padding: 4px;
-  width: 70px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-}
-.btnSearch:hover {
-  background-color: rgb(253, 252, 252);
-  border: 2px solid #ffddc1;
-  color:black; ;
-  font-weight: 500;
-}
-.btnClear{
-  margin-left: 10px;
-  background-color: #c63f17;
-  border: 2px solid #c63f17;
-  color:white;
-  padding: 4px;
-  width: 70px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-}
-.btnClear:hover {
-  background-color: rgb(253, 252, 252);
-  border: 2px solid #c63f17;
-  color:#c63f17;
-  font-weight: 500;
-}
-.btnAddUser{
-  margin-left: 10px;
-  margin-top: 5px;
-  background-color: #ffddc1;
-  border: 2px solid #ffddc1;
-  color:#000000; ;
-  padding: 4px;
-  width: 70px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-}
-.btnAddUser:hover {
-  background-color: #ffddc1;
-  color:white;
-  font-weight: 500;
-}
-table {
-  margin-top: 20px;
-  margin-left: 20px;
-  border-collapse: collapse;
-  
-}
-table, th, td {
-  border:1px solid rgb(255, 255, 255);
-  padding: 8px;
-}
-th {
-  background-color: #c8e6c9;
-  color: black;
-  font-weight: 400;
-  font-size: 17px;
-}
-tr {
-  background-color: rgb(255, 255, 255);
-  border-bottom: 2px solid #c8e6c9;
-  font-size: 16px;
-}
-.btnDelete{
-  margin-left: 10px;
-  background-color: #c63f17; 
-  border: 2px solid #c63f17;
-  color:white;
-  padding: 5px;
-  width: 50px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-}
-.btnDelete:hover {
-  background-color: white;
-  color:#c63f17;
-  font-weight: 500;
-}
-.btnEdit{
-  margin-left: 10px;
-  background-color: #a2bb9a;
-  border: 2px solid #a2bb9a;
-  color:white;
-  padding: 5px;
-  width: 50px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-}
-.btnEdit:hover {
-  background-color: white;
-  color:#a2bb9a;
-  font-weight: 500;
-}
+
 .labelForm {
   font-size: 15px;
   display: inline-block;
   margin: 5px;
 }
+
 .inputForm {
   margin-left: 5px;
   padding: 4px;
   font-size: medium;
   border-radius: 5px;
 }
+
 .buttons {
   margin-left: 50px;
   margin-top: 5px;
-}
-.btnSave {
-  margin-top: 5px;
-  margin-left: 5px;
-  background-color: #a2bb9a;
-  border: 2px solid #a2bb9a;
-  color:white;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.btnSave:disabled{
-  background-color: #b6b6b6;
-  color:white;
-  border: 2px solid #b6b6b6;
-  font-weight: 500;
-}
-.btnSaveAdd:disabled{
-  background-color: #b6b6b6;
-  color:white;
-  border: 2px solid #b6b6b6;
-  font-weight: 500;
-}
-.btnSaveAdd {
-  margin-top: 5px;
-  margin-left: 5px;
-  background-color: #a2bb9a;
-  border: 2px solid #a2bb9a;
-  color:white;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.btnBack{
-  margin-top: 5px;
-  margin-left: 5px;
-  background-color: #c65032;
-  border: 2px solid #c65032;
-  color:white;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .loading {
@@ -275,4 +116,3 @@ tr {
   animation-duration: 10s;
   animation-iteration-count: infinite;
 }
-
